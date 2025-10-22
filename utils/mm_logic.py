@@ -1,3 +1,8 @@
+#SOME IDEAS FOR CUSTOM PLAYER PREFERENCES
+#Intensity: casual, medium, competitive
+#Session Length: short, medium, long (based on score you want to play to)
+#Important thing to determine is weight between elo diff and preference match. 70/30% elo diff/preference match?
+
 def compat_score(elo1: int, prefs1: dict, elo2: int, prefs2: dict) -> int:
     # Replace with your real logic; must return 1..10
     score = 10 - abs(elo1 - elo2) // 100
