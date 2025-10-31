@@ -7,20 +7,26 @@ from psycopg_pool import ConnectionPool
 import json
 import time
 
+
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.supa_db import SupabaseDB
+from core.users import users_bp
 from utils.elo import Elo
 from config.config import (DB_DSN, BASE_ETA_SECONDS, MATCHMAKING_TIMEOUT, MATCHMAKING_POLL_INTERVAL,
                            INITIAL_COMPAT_THRESHOLD, MINIMUM_COMPAT_THRESHOLD, DECAY_RATE_PER_SECOND)
 from utils.mm_logic import compat_score, eta_seconds
 
+
+
 app = Flask(__name__)
+
 
 # Configuration
 app.config['DEBUG'] = True
 app.config['JSON_SORT_KEYS'] = False
+app.register_blueprint(users_bp)
 
 # Initialize PostgreSQL connection pool (for matchmaking only - needs row locking)
 try:
